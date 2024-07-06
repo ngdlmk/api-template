@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import userServices from "../services/user-services";
+import { Request, Response } from 'express';
+import userServices from 'services/user-services';
 
 async function getUser(req: Request, res: Response) {
   const { email, password } = req.body;

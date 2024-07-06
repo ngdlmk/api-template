@@ -1,9 +1,6 @@
-import { User } from "../models/user";
+import { User } from 'models/user';
 
-async function createUser(
-  email: string,
-  password: string,
-) {
+async function createUser(email: string, password: string) {
   const user = new User({
     email,
     password,

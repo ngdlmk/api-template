@@ -1,18 +1,18 @@
-import rateLimit from "express-rate-limit";
-import * as dotenv from "dotenv";
+import rateLimit from 'express-rate-limit';
+import * as dotenv from 'dotenv';
 const envFile = `.env.${process.env.NODE_ENV}`;
 dotenv.config({ path: envFile });
-import express, { Request, Response } from "express";
-import cors from "cors";
+import express, { Request, Response } from 'express';
+import cors from 'cors';
 //import admin from "firebase-admin";
-import mongoose from "mongoose";
-import authRoutes from "./routes/auth-routes";
-import userRoutes from "./routes/user-routes";
+import mongoose from 'mongoose';
+import authRoutes from './routes/auth-routes';
+import userRoutes from './routes/user-routes';
 
 const tokenKeyGenerator = (req: Request) => {
   // Extract the token from the request header
-  const token = req.headers["authorization"]?.split(" ")[1];
-  return token || "unknown-token"; // Use a default key if the token is missing
+  const token = req.headers['authorization']?.split(' ')[1];
+  return token || 'unknown-token'; // Use a default key if the token is missing
 };
 
 const limiter = rateLimit({
@@ -24,7 +24,7 @@ const limiter = rateLimit({
   handler: (req: Request, res: Response) => {
     res
       .status(429)
-      .json({ message: "Too many requests, please try again later." });
+      .json({ message: 'Too many requests, please try again later.' });
   },
 });
 
@@ -32,7 +32,7 @@ const limiter = rateLimit({
 //const serviceAccount = require("../firebase.json");
 // Create an instance of the express application
 const app = express();
-app.use(express.json({ limit: "10mb" }));
+app.use(express.json({ limit: '10mb' }));
 app.use(cors());
 app.use(limiter);
 
@@ -42,8 +42,8 @@ setTimeout(() => {
 // Define a port number
 const PORT = process.env.PORT || 3001;
 //routes go here
-app.use("/user", userRoutes);
-app.use("/auth", authRoutes);
+app.use('/user', userRoutes);
+app.use('/auth', authRoutes);
 
 export async function connectDB() {
   try {
