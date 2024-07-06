@@ -1,5 +1,6 @@
-const tsConfigPaths = require("tsconfig-paths");
-const tsConfig = require("./tsconfig.json");
+/* eslint-disable @typescript-eslint/no-var-requires */
+const tsConfigPaths = require('tsconfig-paths');
+const tsConfig = require('./tsconfig.json');
 
 // Register paths
 tsConfigPaths.register({
@@ -8,4 +9,4 @@ tsConfigPaths.register({
 });
 
 // Start your application
-require("./src/app"); // Adjust this path to your entry file
+require('./src/app'); // Adjust this path to your entry file
