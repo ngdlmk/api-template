@@ -5,9 +5,10 @@ dotenv.config({ path: envFile });
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 //import admin from "firebase-admin";
-import mongoose from 'mongoose';
+//import mongoose from 'mongoose';
 import authRoutes from './routes/auth-routes';
 import userRoutes from './routes/user-routes';
+//import { uploadFileToAzure } from 'services/azure-storage-service';
 
 const tokenKeyGenerator = (req: Request) => {
   // Extract the token from the request header
@@ -28,7 +29,6 @@ const limiter = rateLimit({
   },
 });
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 //const serviceAccount = require("../firebase.json");
 // Create an instance of the express application
 const app = express();
@@ -45,15 +45,20 @@ const PORT = process.env.PORT || 3001;
 app.use('/user', userRoutes);
 app.use('/auth', authRoutes);
 
+app.post('/test/user', (req: Request) => {
+  console.log(req.body);
+});
+
 export async function connectDB() {
   try {
-    const MONGO_URI = process.env.MONGO_URI;
+    console.log('TEST');
+    //const MONGO_URI = process.env.MONGO_URI;
     //firebase settings
     /* admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
       storageBucket: process.env.STORAGE_BUCKET,
     }); */
-    if (MONGO_URI) await mongoose.connect(MONGO_URI);
+    //if (MONGO_URI) await mongoose.connect(MONGO_URI);
     return;
   } catch (error) {
     console.log(error);
